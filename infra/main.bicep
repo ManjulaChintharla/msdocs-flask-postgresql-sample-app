@@ -20,10 +20,8 @@ param secretKey string
 @description('Name of the existing resource group')
 param existingResourceGroupName string
 
-
 var resourceToken = toLower(uniqueString(subscription().id, name, location))
 var tags = { 'azd-env-name': name }
-
 
 module resources 'resources.bicep' = {
   name: 'resources'
