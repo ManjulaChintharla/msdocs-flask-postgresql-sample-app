@@ -28,7 +28,7 @@ resource resourceGroup 'Microsoft.Resources/resourceGroups@2021-04-01' = {
 
 module resources 'resources.bicep' = {
   name: 'resources'
-  scope: resourceGroup
+  scope: resourceGroup(existingResourceGroupName) // Use the existing resource group
   params: {
     name: name
     location: location
