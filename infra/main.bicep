@@ -17,6 +17,10 @@ param databasePassword string
 @description('Django SECRET_KEY for securing signed data')
 param secretKey string
 
+@description('Name of the existing resource group')
+param existingResourceGroupName string
+
+
 var resourceToken = toLower(uniqueString(subscription().id, name, location))
 var tags = { 'azd-env-name': name }
 
