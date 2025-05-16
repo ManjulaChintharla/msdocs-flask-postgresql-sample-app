@@ -22,22 +22,18 @@ param principalId string = ''
 var resourceToken = toLower(uniqueString(subscription().id, name, location))
 var tags = { 'azd-env-name': name }
 
-resource resourceGroup 'Microsoft.Resources/resourceGroups@2021-04-01' = {
-  name: '${name}-rg'
-  location: location
-  tags: tags
-}
+@description('Name of the existing resource group')
+param existingResourceGroupName string
 
 module resources 'resources.bicep' = {
   name: 'resources'
-  scope: resourceGroup
+  scope: resourceGroup(existingResourceGroupName) // Use the existing resource group
   params: {
     name: name
     location: location
     resourceToken: resourceToken
     tags: tags
     databasePassword: databasePassword
-    principalId: principalId
     secretKey: secretKey
   }
 }
